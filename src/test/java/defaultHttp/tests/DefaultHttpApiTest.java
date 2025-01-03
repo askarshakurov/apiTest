@@ -127,8 +127,9 @@ class DefaultHttpApiTest extends DefaultApiTestBase {
         );
     }
 
-    @ParameterizedTest(name = "Создание пользователя с разлиным password = {0}")
+    @ParameterizedTest(name = "password = {0}")
     @CsvFileSource(resources = "/createUserWithDifferentPassword.csv")
+    @DisplayName("Создание пользователя с различным :")
     void createUserWithDifferentPassword(String password) {
 
         String email = "email_" + System.currentTimeMillis() + "@test.com";
