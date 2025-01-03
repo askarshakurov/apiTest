@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // JUnit
+    testImplementation platform("org.junit:junit-bom:${junitVersion}")
+    testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
+    testImplementation 'org.junit.platform:junit-platform-suite-engine:1.9.1'
+
+    // Rest-assured
+    testImplementation "io.rest-assured:rest-assured:${restAssuredVersion}"
+
+    // Gson
+    testImplementation "com.google.code.gson:gson:${gsonVersion}"
+
+    // Allure
+    testImplementation "io.qameta.allure:allure-grpc:${allureVersion}"
+    testImplementation "io.qameta.allure:allure-junit5:${allureVersion}"
+}
+
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+    systemProperty 'allure.results.directory', layout.buildDirectory.dir("allure-results").get().asFile
+}
